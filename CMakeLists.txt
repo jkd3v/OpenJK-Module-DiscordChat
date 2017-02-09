@@ -1,15 +1,16 @@
 cmake_minimum_required (VERSION 2.6)
-project (discord_chat)
 
-# add preprocessor definitions
-add_definitions(-D_CGAME -DNO_CG_TRAP)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
+set(PNAME "discord_chat")
 
-# add include directories
-include_directories(include/sdk include/mpp include/util)
+project (${PNAME})
 
-# add the executable
+# The files to use
 file(GLOB module_SRC
   "src/*.h"
   "src/*.c"
+  "src/*.cpp"
 )
-add_library(discord_chat SHARED ${module_SRC})
+
+add_subdirectory (include/openjk)
+add_subdirectory (include/legacy)

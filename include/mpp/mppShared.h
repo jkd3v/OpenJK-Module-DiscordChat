@@ -1,6 +1,13 @@
 #ifndef __MPP_SHARED_H__
 #define __MPP_SHARED_H__
 
+#ifndef S_COLOR_GREY 
+#define S_COLOR_GREY "^9"
+#endif
+#ifndef S_COLOR_ORANGE 
+#define S_COLOR_ORANGE "^8"
+#endif
+
 /**************************************************
 * MultiPlugin++ by Deathspike
 *
@@ -31,6 +38,25 @@ typedef struct cmd_function_s
 	xcommand_t				function;
 	completionFunc_t		complete;
 } cmd_t;
+
+typedef struct {
+	qboolean		infoValid;
+	char			name[MAX_QPATH];
+	char			modelName[MAX_QPATH];
+	char			forcePowers[MAX_QPATH];
+	char			saberName[64];
+	char			saber2Name[64];
+	int				icolor1;
+	int				icolor2;
+	int				botSkill;
+	int				handicap;
+	int				wins, losses;	// in tourney mode
+	int				teamTask;		// task in teamplay (offence/defence)
+	qboolean		teamLeader;		// true when this is a team leader
+	int				siegeDesiredTeam;
+	int				duelTeam;
+	team_t			team;
+} mpp_clientInfo_t;
 
 typedef enum {
 	TopLeft, TopCenter, TopRight,
@@ -100,7 +126,7 @@ typedef struct {
 	* which modifications are able to alter.
 	**************************************************/
 
-	clientInfo_t	*clientInfo;
+	mpp_clientInfo_t	*clientInfo;
 	vec3_t			*currentOrigin;
 	qboolean		*currentValid;
 	refdef_t		*refdef;
